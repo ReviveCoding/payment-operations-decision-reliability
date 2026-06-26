@@ -41,7 +41,6 @@ exclude_also = [
 ]
 
 [tool.mypy]
-python_version = "3.11"
 files = ["src/payment_ops_hardening"]
 ignore_missing_imports = true
 show_error_codes = true
