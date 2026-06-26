@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools==82.0.1", "wheel==0.47.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "payment-ops-hardening-overlay"
+version = "0.9.4"
+description = "Reliability-first AML transaction ranking with release-integrity controls and frozen-transfer evaluation"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Jinwoo Bae"}]
+requires-python = ">=3.11"
+dependencies = [
+  "filelock>=3.13,<4",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.6,<2",
+  "joblib>=1.4,<2",
+  "catboost>=1.2,<2",
+]
+
+[project.scripts]
+payment-ops-hardening-validate = "payment_ops_hardening.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["payment_ops_hardening"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+exclude_also = [
+  "if __name__ == .__main__.:",
+]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src/payment_ops_hardening"]
+ignore_missing_imports = true
+show_error_codes = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+strict_equality = true
+
+[tool.ruff]
+extend-exclude = [".venv", ".venv.disabled-*", ".local-run", "build", "dist", "*.egg-info"]

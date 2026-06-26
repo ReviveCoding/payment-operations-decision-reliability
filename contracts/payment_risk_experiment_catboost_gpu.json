@@ -1,0 +1,20 @@
+{
+  "timestamp_column": "TxDateTime",
+  "target_column": "TxSts",
+  "positive_values": ["RJCT"],
+  "amount_column": "InstdAmt",
+  "categorical_columns": ["Currency", "DbtrAgtBIC", "CdtrAgtBIC", "DbtrCountry", "CdtrCountry", "PurposeCode"],
+  "payer_column": "DbtrAgtBIC",
+  "payee_column": "CdtrAgtBIC",
+  "train_fraction": 0.6,
+  "validation_fraction": 0.2,
+  "review_fraction": 0.01,
+  "bootstrap_repeats": 1000,
+  "random_seed": 20260620,
+  "candidate_backend": "catboost",
+  "use_gpu": true,
+  "max_iterations": 800,
+  "min_capture_delta": 0.0,
+  "max_brier_regression": 0.002,
+  "target_maturity_seconds": 0
+}

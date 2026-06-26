@@ -1,0 +1,209 @@
+{
+  "schema_version": "1.2",
+  "template_variables": [
+    "__SELECTED_MODEL__",
+    "__EXPECTED_KEY_ID__",
+    "__MINIMUM_RELEASE_SEQUENCE__"
+  ],
+  "expected_key_id": "__EXPECTED_KEY_ID__",
+  "minimum_release_sequence": "__MINIMUM_RELEASE_SEQUENCE__",
+  "allowed_release_states": [
+    "PROMOTE"
+  ],
+  "reject_untracked_files": false,
+  "allowed_untracked_paths": [],
+  "required_paths": [
+    "models/__SELECTED_MODEL__.joblib",
+    "models/xgboost_aft.json",
+    "models/xgboost_aft_metrics.json",
+    "data/point_in_time_features.csv",
+    "data/model_predictions.csv",
+    "data/aft_predictions.csv",
+    "reports/release_decision.json",
+    "reports/data_plane_checks.json",
+    "reports/model_benchmark.json",
+    "reports/survival_benchmark.json",
+    "reports/simulator_validation.json",
+    "reports/system_plane_checks.json",
+    "reports/source_reconciliation.json",
+    "run_status.json",
+    "pipeline_progress.json"
+  ],
+  "content_contracts": {
+    "models/__SELECTED_MODEL__.joblib": {
+      "type": "binary",
+      "min_size_bytes": 1
+    },
+    "models/xgboost_aft.json": {
+      "type": "binary",
+      "min_size_bytes": 1
+    },
+    "models/xgboost_aft_metrics.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "numeric_features",
+        "medians",
+        "split_metrics"
+      ],
+      "min_items": 3
+    },
+    "data/point_in_time_features.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "split",
+        "decision_time",
+        "amount_log",
+        "evidence_completeness",
+        "complaint_narrative"
+      ],
+      "min_rows": 1
+    },
+    "data/model_predictions.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "split",
+        "model",
+        "risk_score",
+        "score_type"
+      ],
+      "min_rows": 1
+    },
+    "data/aft_predictions.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "split",
+        "predicted_resolution_hours",
+        "predicted_sla_pressure"
+      ],
+      "min_rows": 1
+    },
+    "reports/release_decision.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "release_state",
+        "selected_model",
+        "selected_policy",
+        "test_confirmation",
+        "stress_confirmation"
+      ],
+      "min_items": 5
+    },
+    "reports/data_plane_checks.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "reports/model_benchmark.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "reports/survival_benchmark.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "reports/simulator_validation.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "reports/system_plane_checks.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "reports/source_reconciliation.json": {
+      "type": "json",
+      "json_type": "object",
+      "min_items": 1
+    },
+    "run_status.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "run_id",
+        "status",
+        "release_state"
+      ],
+      "min_items": 3
+    },
+    "pipeline_progress.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "run_id",
+        "stage"
+      ],
+      "min_items": 2
+    }
+  },
+  "require_signature": true,
+  "json_value_equalities": [
+    {
+      "name": "run_id_consistency",
+      "references": [
+        {
+          "path": "release_manifest.json",
+          "pointer": "/run_id"
+        },
+        {
+          "path": "run_status.json",
+          "pointer": "/run_id"
+        },
+        {
+          "path": "pipeline_progress.json",
+          "pointer": "/run_id"
+        }
+      ]
+    },
+    {
+      "name": "release_state_consistency",
+      "references": [
+        {
+          "path": "release_manifest.json",
+          "pointer": "/release_state"
+        },
+        {
+          "path": "run_status.json",
+          "pointer": "/release_state"
+        },
+        {
+          "path": "reports/release_decision.json",
+          "pointer": "/release_state"
+        }
+      ]
+    },
+    {
+      "name": "selected_model_consistency",
+      "references": [
+        {
+          "path": "release_manifest.json",
+          "pointer": "/selected_model"
+        },
+        {
+          "path": "reports/release_decision.json",
+          "pointer": "/selected_model"
+        }
+      ]
+    },
+    {
+      "name": "selected_policy_consistency",
+      "references": [
+        {
+          "path": "release_manifest.json",
+          "pointer": "/selected_policy"
+        },
+        {
+          "path": "reports/release_decision.json",
+          "pointer": "/selected_policy"
+        }
+      ]
+    }
+  ]
+}

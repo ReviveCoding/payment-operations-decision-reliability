@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560" role="img" aria-labelledby="title desc">
+  <title id="title">PaymentOps AML v0.9.4 Capture at 1% review budget</title>
+  <desc id="desc">Baseline and CatBoost candidate Capture at 1% review capacity for HI-Medium confirmation and frozen HI-Medium to LI-Medium transfer.</desc>
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: currentColor; }
+    .title { font-size: 28px; font-weight: 700; }
+    .subtitle { font-size: 15px; }
+    .panel { fill: none; stroke: currentColor; stroke-opacity: .35; }
+    .grid { stroke: currentColor; stroke-opacity: .18; stroke-width: 1; }
+    .axis { font-size: 12px; }
+    .label { font-size: 16px; font-weight: 650; }
+    .detail { font-size: 13px; }
+    .value { font-size: 16px; font-weight: 700; }
+    .uplift { font-size: 19px; font-weight: 750; }
+    .footnote { font-size: 12px; }
+  </style>
+  <text x="48" y="48" class="title">AML Capture@1%: v0.9.4 Medium Evidence</text>
+  <text x="48" y="75" class="subtitle">Fixed review capacity, pre-registered transaction-mass bootstrap primary inference</text>
+  <rect x="48" y="108" width="1024" height="184" rx="10" class="panel"/>
+  <text x="76" y="143" class="label">HI-Medium chronological confirmation</text>
+  <text x="76" y="166" class="detail">Primary 95% CI: +6.37 to +28.00 percentage points Â· Candidate promoted</text>
+  <line x1="336" y1="190" x2="936" y2="190" class="grid"/>
+  <line x1="336" y1="190" x2="336" y2="265" class="grid"/>
+  <line x1="486" y1="190" x2="486" y2="265" class="grid"/>
+  <line x1="636" y1="190" x2="636" y2="265" class="grid"/>
+  <line x1="786" y1="190" x2="786" y2="265" class="grid"/>
+  <line x1="936" y1="190" x2="936" y2="265" class="grid"/>
+  <text x="328" y="283" class="axis">0%</text>
+  <text x="470" y="283" class="axis">25%</text>
+  <text x="620" y="283" class="axis">50%</text>
+  <text x="770" y="283" class="axis">75%</text>
+  <text x="920" y="283" class="axis">100%</text>
+  <text x="76" y="213" class="detail">Baseline</text>
+  <rect x="336" y="198" width="430.68" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text x="778" y="215" class="value">71.78%</text>
+  <text x="76" y="250" class="detail">CatBoost candidate</text>
+  <rect x="336" y="235" width="515.46" height="20" rx="3"/>
+  <text x="863" y="252" class="value">85.91%</text>
+  <text x="947" y="246" class="uplift">+14.14pp</text>
+  <rect x="48" y="316" width="1024" height="184" rx="10" class="panel"/>
+  <text x="76" y="351" class="label">Frozen HI-Medium to LI-Medium transfer</text>
+  <text x="76" y="374" class="detail">No LI labels used for fitting, tuning, calibration, or threshold selection</text>
+  <text x="76" y="394" class="detail">Primary 95% CI: +6.71 to +31.98 percentage points Â· Candidate promoted</text>
+  <line x1="336" y1="414" x2="936" y2="414" class="grid"/>
+  <line x1="336" y1="414" x2="336" y2="489" class="grid"/>
+  <line x1="486" y1="414" x2="486" y2="489" class="grid"/>
+  <line x1="636" y1="414" x2="636" y2="489" class="grid"/>
+  <line x1="786" y1="414" x2="786" y2="489" class="grid"/>
+  <line x1="936" y1="414" x2="936" y2="489" class="grid"/>
+  <text x="328" y="507" class="axis">0%</text>
+  <text x="470" y="507" class="axis">25%</text>
+  <text x="620" y="507" class="axis">50%</text>
+  <text x="770" y="507" class="axis">75%</text>
+  <text x="920" y="507" class="axis">100%</text>
+  <text x="76" y="437" class="detail">Frozen baseline</text>
+  <rect x="336" y="422" width="297.06" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+  <text x="645" y="439" class="value">49.51%</text>
+  <text x="76" y="474" class="detail">Frozen CatBoost candidate</text>
+  <rect x="336" y="459" width="408.72" height="20" rx="3"/>
+  <text x="756" y="476" class="value">68.12%</text>
+  <text x="847" y="470" class="uplift">+18.61pp</text>
+  <text x="48" y="540" class="footnote">Top 1% review budget Â· 400 paired transaction-mass bootstrap resamples Â· IBM AML synthetic benchmark</text>
+</svg>

@@ -1,0 +1,28 @@
+include CHANGELOG.md
+include LICENSE
+include README.md
+include RELEASE_NOTES.md
+include requirements-modeling.txt
+include pyproject.toml
+include MANIFEST.in
+
+include docs/MODEL_CARD_V094.md
+include docs/V094_EVIDENCE.md
+include docs/LEGACY_OVERLAY_CONTEXT.md
+include docs/known_limitations.md
+include docs/operations.md
+include docs/release_qualification.md
+include docs/v094_confirmatory_protocol.md
+
+recursive-include contracts *.json
+recursive-include data *.csv
+recursive-include scripts *.py *.ps1 *.sh
+recursive-include src *.py
+recursive-include tests *.py
+recursive-include .github *.yml
+recursive-include constraints *.txt
+recursive-include workflow *.snippet
+
+prune reports
+global-exclude __pycache__ *.py[cod] .coverage
+include docs/assets/v094_capture_at_1pct.svg

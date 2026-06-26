@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.1",
+  "expected_key_id": "paymentops-2026-q2",
+  "allowed_release_states": [
+    "PROMOTE"
+  ],
+  "reject_untracked_files": true,
+  "allowed_untracked_paths": [],
+  "required_paths": [
+    "models/logistic_calibrated.joblib",
+    "models/xgboost_aft.json",
+    "models/xgboost_aft_metrics.json",
+    "data/point_in_time_features.csv",
+    "data/model_predictions.csv",
+    "data/aft_predictions.csv",
+    "reports/release_decision.json",
+    "reports/data_plane_checks.json",
+    "reports/model_benchmark.json",
+    "reports/system_plane_checks.json"
+  ],
+  "content_contracts": {
+    "models/logistic_calibrated.joblib": {
+      "type": "binary",
+      "min_size_bytes": 1
+    },
+    "models/xgboost_aft.json": {
+      "type": "binary",
+      "min_size_bytes": 1
+    },
+    "models/xgboost_aft_metrics.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "status",
+        "path"
+      ],
+      "min_items": 2
+    },
+    "data/point_in_time_features.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "value"
+      ],
+      "min_rows": 2
+    },
+    "data/model_predictions.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "value"
+      ],
+      "min_rows": 2
+    },
+    "data/aft_predictions.csv": {
+      "type": "csv",
+      "required_columns": [
+        "case_id",
+        "value"
+      ],
+      "min_rows": 2
+    },
+    "reports/release_decision.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "status",
+        "path"
+      ],
+      "min_items": 2
+    },
+    "reports/data_plane_checks.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "status",
+        "path"
+      ],
+      "min_items": 2
+    },
+    "reports/model_benchmark.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "status",
+        "path"
+      ],
+      "min_items": 2
+    },
+    "reports/system_plane_checks.json": {
+      "type": "json",
+      "json_type": "object",
+      "required_keys": [
+        "status",
+        "path"
+      ],
+      "min_items": 2
+    }
+  },
+  "minimum_release_sequence": 100,
+  "require_signature": true
+}

@@ -1,0 +1,67 @@
+{
+  "protocol_id": "paymentops_aml_v094_medium_confirmatory",
+  "protocol_version": "0.9.4",
+  "pre_registered_at_utc": "2026-06-25T23:59:00Z",
+  "protocol_purpose": "Untouched Medium-data confirmation of the no-bank-identity configuration selected from Small-data exploratory evidence.",
+  "timestamp_column": "Timestamp",
+  "target_column": "Is Laundering",
+  "positive_values": [
+    "1"
+  ],
+  "amount_column": "Amount Paid",
+  "categorical_columns": [
+    "From Bank",
+    "To Bank",
+    "Payment Currency",
+    "Receiving Currency",
+    "Payment Format"
+  ],
+  "payer_column": "Account",
+  "payee_column": "Account.1",
+  "corridor_from_column": "From Bank",
+  "corridor_to_column": "To Bank",
+  "max_rows": null,
+  "train_fraction": 0.6,
+  "validation_fraction": 0.2,
+  "calibration_fraction": 0.5,
+  "review_fraction": 0.01,
+  "bootstrap_repeats": 400,
+  "bootstrap_sample_size": 300000,
+  "bootstrap_method": "time_block",
+  "bootstrap_block_seconds": 21600,
+  "random_seed": 20260624,
+  "candidate_backend": "catboost",
+  "use_gpu": true,
+  "gpu_devices": "0",
+  "max_iterations": 900,
+  "candidate_weight_modes": [
+    "none",
+    "SqrtBalanced"
+  ],
+  "min_capture_delta": 0.0,
+  "max_brier_regression": 0.002,
+  "target_maturity_seconds": 0,
+  "exclude_bank_identity_categoricals": true,
+  "primary_bootstrap": {
+    "method": "transaction_mass_block",
+    "target_block_rows": 25000,
+    "sample_size_target": 300000,
+    "repeats": 400,
+    "random_seed": 20260624,
+    "promotion_rule": "capture_delta_ci_low > 0 and brier_delta <= max_brier_regression"
+  },
+  "stability_diagnostic": {
+    "method": "time_block",
+    "block_seconds": 21600,
+    "sample_size_target": 300000,
+    "repeats": 400,
+    "random_seed": 20260624,
+    "role": "secondary_diagnostic_only"
+  },
+  "claim_boundary": [
+    "HI-Medium is untouched by Small-data model-selection analysis.",
+    "No-bank-identity removes direct From Bank, To Bank, and bank_pair categorical inputs.",
+    "Bank-pair historical aggregates remain label-free temporal features.",
+    "LI-Medium labels are prohibited for frozen transfer fitting, tuning, and calibration."
+  ]
+}

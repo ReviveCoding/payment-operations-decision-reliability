@@ -1,0 +1,32 @@
+{
+  "timestamp_column": "Timestamp",
+  "target_column": "Is Laundering",
+  "positive_values": [
+    "1"
+  ],
+  "amount_column": "Amount Paid",
+  "categorical_columns": [
+    "From Bank",
+    "To Bank",
+    "Payment Currency",
+    "Receiving Currency",
+    "Payment Format"
+  ],
+  "payer_column": "Account",
+  "payee_column": "Account.1",
+  "corridor_from_column": "From Bank",
+  "corridor_to_column": "To Bank",
+  "max_rows": 500000,
+  "train_fraction": 0.6,
+  "validation_fraction": 0.2,
+  "review_fraction": 0.01,
+  "bootstrap_repeats": 150,
+  "bootstrap_sample_size": 100000,
+  "random_seed": 20260624,
+  "candidate_backend": "extra_trees",
+  "use_gpu": false,
+  "max_iterations": 350,
+  "min_capture_delta": 0.0,
+  "max_brier_regression": 0.002,
+  "target_maturity_seconds": 0
+}

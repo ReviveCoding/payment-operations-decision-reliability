@@ -1,0 +1,28 @@
+# Merge into the package-build job after wheel/sdist creation.
+# actions/attest is pinned to the immutable v4.1.0 commit.
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+steps:
+  - name: Build distributions
+    run: python -m build
+
+  - name: Verify distribution contents
+    run: python scripts/verify_distribution.py dist/*.whl dist/*.tar.gz
+
+  - name: Attest wheel and source distribution
+    uses: actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26 # v4.1.0
+    with:
+      subject-path: |
+        dist/*.whl
+        dist/*.tar.gz
+
+  - name: Verify generated attestations
+    env:
+      GH_TOKEN: ${{ github.token }}
+    run: |
+      for artifact in dist/*.whl dist/*.tar.gz; do
+        gh attestation verify "$artifact" -R "$GITHUB_REPOSITORY"
+      done

@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.json
+htmlcov/
+build/
+dist/
+*.egg-info/
+.venv*/
+qualification_logs/
+deployment/*.json
+
+# >>> PaymentOps local-only artifacts >>>
+/.local-run/
+/.venv/
+/.venv.disabled-*/
+/.coverage
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+**/__pycache__/
+*.py[cod]
+
+/build/
+/dist/
+*.egg-info/
+
+/paymentops-uplift-extension-*.zip
+/paymentops-v094*-extension.zip
+/apply_paymentops_*.ps1
+/repair_paymentops_*.ps1
+/run_paymentops_*bootstrap_sensitivity.ps1
+/resume_paymentops_*.ps1
+# <<< PaymentOps local-only artifacts <<<
