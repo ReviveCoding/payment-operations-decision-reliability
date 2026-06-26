@@ -133,4 +133,4 @@ def test_cli_reports_package_version(
     with pytest.raises(SystemExit) as exc:
         main()
     assert exc.value.code == 0
-    assert capsys.readouterr().out.strip() == "payment-ops-hardening-validate 0.8.2"
+    assert capsys.readouterr().out.strip() == "payment-ops-hardening-validate 0.9.4"

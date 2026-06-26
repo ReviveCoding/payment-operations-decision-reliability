@@ -14,7 +14,7 @@ from payment_ops_hardening.verified_loader import (
     read_verified_artifacts,
 )
 
-__version__ = "0.8.2"
+__version__ = "0.9.4"
 
 __all__ = [
     "ContractTemplateError",

@@ -46,7 +46,11 @@ jobs:
       - name: Install qualification environment
         run: |
           python -m pip install --upgrade pip
-          python -m pip install --no-cache-dir -c constraints/ci.txt -r requirements-modeling.txt . pytest pytest-cov ruff mypy build setuptools wheel
+          # Install tooling first, then force-install this checkout.
+          # qualify_local.py compares installed package metadata with pyproject.toml.
+          python -m pip install --no-cache-dir -c constraints/ci.txt -r requirements-modeling.txt pytest pytest-cov ruff mypy build setuptools wheel
+          python -m pip install --no-deps --force-reinstall .
+          python -c "from importlib.metadata import version; expected='0.9.4'; observed=version('payment-ops-hardening-overlay'); assert observed == expected, f'installed={observed}, expected={expected}'"
       - name: Canonical local-parity qualification
         run: >-
           python scripts/qualify_local.py
