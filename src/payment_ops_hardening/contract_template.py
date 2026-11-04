@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from payment_ops_hardening.atomic_io import atomic_write_json
 from payment_ops_hardening.release_contract import load_release_contract

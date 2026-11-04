@@ -1,18 +1,18 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from filelock import FileLock, Timeout
 
 from payment_ops_hardening.bundle_inventory import safe_relative_path
-from payment_ops_hardening.secure_io import StableFileError, read_stable_bytes
 from payment_ops_hardening.release_security import (
     ReleaseSecurityError,
     release_lock_path,
     verify_release_security,
 )
+from payment_ops_hardening.secure_io import StableFileError, read_stable_bytes
 
 
 def _materialize_artifact_paths(values: Iterable[str | Path]) -> list[str | Path]:

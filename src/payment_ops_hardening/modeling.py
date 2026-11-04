@@ -8,13 +8,13 @@ only derives historical features from events strictly earlier than each row.
 
 from __future__ import annotations
 
-from collections import defaultdict, deque
-from dataclasses import asdict, dataclass
-from pathlib import Path
-from typing import Any, Iterable, Literal
-
 import json
 import math
+from collections import defaultdict, deque
+from collections.abc import Iterable
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any, Literal
 
 
 class ModelingError(RuntimeError):
@@ -68,7 +68,7 @@ class ExperimentConfig:
     candidate_weight_modes: tuple[str, ...] = ("none",)
 
     @staticmethod
-    def from_mapping(value: dict[str, Any]) -> "ExperimentConfig":
+    def from_mapping(value: dict[str, Any]) -> ExperimentConfig:
         known = set(ExperimentConfig.__dataclass_fields__)
         unknown = set(value) - known
         if unknown:

@@ -1,15 +1,15 @@
 from __future__ import annotations
 
 import argparse
-import json
 import importlib.metadata
-import tomllib
+import json
 import os
 import platform
-import subprocess
 import shutil
+import subprocess
 import sys
 import time
+import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]

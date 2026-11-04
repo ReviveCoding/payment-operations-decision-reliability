@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 import base64
+from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import Iterable, Mapping
 
 from filelock import FileLock, Timeout
 
@@ -24,9 +24,9 @@ from payment_ops_hardening.bundle_inventory import (
     write_inventory,
 )
 from payment_ops_hardening.manifest_auth import (
-    ManifestAuthenticationError,
     SIGNATURE_ALGORITHM,
     SIGNATURE_FILE,
+    ManifestAuthenticationError,
     manifest_signature_digest,
     normalized_key_id,
     signature_required,
