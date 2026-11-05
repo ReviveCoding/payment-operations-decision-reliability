@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import csv
 import os
+from collections.abc import Iterable, Mapping
 from pathlib import Path, PurePosixPath
-from typing import Iterable, Mapping
 
 from payment_ops_hardening.atomic_io import atomic_write_json
 from payment_ops_hardening.secure_io import StableFileError, read_stable_file

@@ -8,13 +8,13 @@ only derives historical features from events strictly earlier than each row.
 
 from __future__ import annotations
 
-from collections import defaultdict, deque
-from dataclasses import asdict, dataclass
-from pathlib import Path
-from typing import Any, Iterable, Literal
-
 import json
 import math
+from collections import defaultdict, deque
+from collections.abc import Iterable
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any, Literal
 
 
 class ModelingError(RuntimeError):
@@ -68,7 +68,7 @@ class ExperimentConfig:
     candidate_weight_modes: tuple[str, ...] = ("none",)
 
     @staticmethod
-    def from_mapping(value: dict[str, Any]) -> "ExperimentConfig":
+    def from_mapping(value: dict[str, Any]) -> ExperimentConfig:
         known = set(ExperimentConfig.__dataclass_fields__)
         unknown = set(value) - known
         if unknown:
@@ -249,14 +249,12 @@ def _online_prior_mean(values: Iterable[float], keys: Iterable[str]) -> list[flo
     counts: dict[str, int] = defaultdict(int)
     output: list[float] = []
     global_sum = 0.0
-    global_count = 0
-    for value, key in zip(values, keys, strict=True):
+    for global_count, (value, key) in enumerate(zip(values, keys, strict=True)):
         fallback = global_sum / global_count if global_count else value
         output.append(sums[key] / counts[key] if counts[key] else fallback)
         sums[key] += value
         counts[key] += 1
         global_sum += value
-        global_count += 1
     return output
 
 
@@ -710,7 +708,7 @@ def _metrics(labels: Any, probabilities: Any, review_fraction: float) -> ModelMe
     ) = _require_modeling_dependencies()
     labels = np.asarray(labels, dtype=int)
     probabilities = np.asarray(probabilities, dtype=float)
-    review_count = max(1, int(math.ceil(len(labels) * review_fraction)))
+    review_count = max(1, math.ceil(len(labels) * review_fraction))
     ranked = np.argsort(-probabilities, kind="mergesort")[:review_count]
     positives = int(labels.sum())
     captured = int(labels[ranked].sum())
@@ -772,9 +770,10 @@ def _bootstrap_capture_delta(
             raise ModelingError("event_times contains invalid datetime values")
         block_ids = nanoseconds // int(block_seconds * 1_000_000_000)
         _, inverse = np.unique(block_ids, return_inverse=True)
-        block_rows = [
-            np.flatnonzero(inverse == index) for index in range(int(inverse.max()) + 1)
-        ]
+        block_count = int(inverse.max()) + 1
+        block_order = np.argsort(inverse, kind="stable")
+        block_sizes = np.bincount(inverse, minlength=block_count)
+        block_rows = np.split(block_order, np.cumsum(block_sizes)[:-1])
         mean_block_size = float(np.mean([len(indices) for indices in block_rows]))
         block_draws = max(1, int(np.ceil(draw_size / mean_block_size)))
 
@@ -884,7 +883,7 @@ def run_champion_challenger(
 
     (
         joblib,
-        np,
+        _np,
         pd,
         *_rest,
     ) = _require_modeling_dependencies()

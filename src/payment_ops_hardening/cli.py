@@ -4,7 +4,6 @@ import argparse
 import json
 
 from payment_ops_hardening import __version__
-
 from payment_ops_hardening.release_contract import (
     ReleaseContractError,
     load_release_contract,

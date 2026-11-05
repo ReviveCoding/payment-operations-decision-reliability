@@ -11,9 +11,9 @@ bootstrap_sample_size fields.
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 import re
 import sys
+from pathlib import Path
 
 MARKER = "# PAYMENTOPS_V093_HARDENING"
 

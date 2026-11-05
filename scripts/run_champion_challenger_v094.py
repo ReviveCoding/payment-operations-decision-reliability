@@ -10,11 +10,11 @@ reported as a separate stability diagnostic.
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict, fields
 import hashlib
 import json
-from pathlib import Path
 import sys
+from dataclasses import asdict, fields
+from pathlib import Path
 from typing import Any
 
 
@@ -335,14 +335,15 @@ def main() -> None:
     import joblib
     import numpy as np
     import pandas as pd
+
     from payment_ops_hardening.modeling import (
         ExperimentConfig,
         _apply_sigmoid_calibrator,
         _bootstrap_capture_delta,
+        _feature_columns,
         _fit_baseline,
         _fit_candidate,
         _fit_sigmoid_calibrator,
-        _feature_columns,
         _metrics,
         _predict_probability,
         _promotion_decision,
